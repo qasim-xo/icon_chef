@@ -7,6 +7,7 @@ import 'package:icon_chef/screens/icon_editor/providers/icon_editor_provider.dar
 import 'package:icon_chef/screens/icon_editor/widgets/android_icon_widget.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/clip_art_widget.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/icon_settings_bar_widget.dart';
+import 'package:icon_chef/screens/icon_editor/widgets/text_tab_options_widget.dart';
 import 'package:image_downloader_web/image_downloader_web.dart';
 
 class IconEditorDesktopScreen extends ConsumerStatefulWidget {
@@ -49,6 +50,7 @@ class _IconEditorDesktopScreenState
   Widget build(BuildContext context) {
     final selectedTab = ref.watch(iconEditorProvider).selectedTab;
     final iconText = ref.watch(iconEditorProvider).iconText;
+
     return Scaffold(
       body: Row(
         children: [
@@ -79,36 +81,14 @@ class _IconEditorDesktopScreenState
               SizedBox(
                 height: 10,
               ),
-              Row(
-                children: [
-                  Text('Text'),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  SizedBox(
-                    height: 60,
-                    width: 200,
-                    child: TextField(
-                      onChanged: (value) {
-                        ref
-                            .read(iconEditorProvider.notifier)
-                            .setIconText(value);
-                      },
-                      controller: textController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Enter a search term',
-                      ),
-                    ),
-                  ),
-                ],
+              TextTabOptionsWidget(
+                textController: textController,
               ),
               GestureDetector(
                 onTap: () {
                   _captureAndDownload();
                 },
                 child: AndroidIconWidget(
-                  text: iconText,
                   globalKey: _globalKey,
                 ),
               ),
