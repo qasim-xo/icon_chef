@@ -19,73 +19,83 @@ class TextTabOptionsWidget extends ConsumerWidget {
     final isBold = ref.watch(iconEditorProvider).isBold;
     final isItalic = ref.watch(iconEditorProvider).isItalic;
     final selectedFont = ref.watch(iconEditorProvider).selectedFont;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Text(
+          'Text',
+          style: context.textTheme.bodyMedium
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        SizedBox(
+          height: 60,
+          width: double.infinity,
+          child: AppTextField(
+            focusedBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(3)),
+            border: OutlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryTextColor)),
+            borderRadius: BorderRadius.circular(3),
+            fillColor: AppColors.whiteColor,
+            onChanged: (val) {
+              ref.read(iconEditorProvider.notifier).setIconText(val);
+            },
+            textController: textController,
+          ),
+        ),
+        Text(
+          'Style',
+          style: context.textTheme.bodyMedium
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
         Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Text('Text'),
-            SizedBox(
-              width: 20,
-            ),
-            SizedBox(
-              height: 60,
-              width: 200,
-              child: AppTextField(
-                onChanged: (val) {
-                  ref.read(iconEditorProvider.notifier).setIconText(val);
-                },
-                textController: textController,
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                ref.read(iconEditorProvider.notifier).setIsBold(!isBold);
-              },
-              child: Container(
-                height: 45,
-                width: 45,
-                decoration: BoxDecoration(
-                    color: isBold == false
-                        ? AppColors.whiteColor
-                        : AppColors.primaryColor.withValues(alpha: 0.3),
-                    border: Border.all(color: AppColors.dividerColor)),
-                child: Center(
-                  child: Text(
-                    'B',
-                    style: context.textTheme.bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
+            Row(
+              children: [
+                Text('Bold'),
+                SizedBox(
+                  width: 10,
                 ),
-              ),
+                Checkbox(
+                    value: isBold,
+                    onChanged: (value) {
+                      ref
+                          .read(iconEditorProvider.notifier)
+                          .setIsBold(value ?? false);
+                    }),
+              ],
             ),
-            GestureDetector(
-              onTap: () {
-                ref.read(iconEditorProvider.notifier).setIsItalic(!isItalic);
-              },
-              child: Container(
-                height: 45,
-                width: 45,
-                decoration: BoxDecoration(
-                    color: isItalic == false
-                        ? AppColors.whiteColor
-                        : AppColors.primaryColor.withValues(alpha: 0.3),
-                    border: Border.all(color: AppColors.dividerColor)),
-                child: Center(
-                  child: Text(
-                    'I',
-                    style: context.textTheme.bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
+            Row(
+              children: [
+                Text('Italic'),
+                SizedBox(
+                  width: 10,
                 ),
-              ),
-            )
+                Checkbox(
+                    value: isItalic,
+                    onChanged: (value) {
+                      ref
+                          .read(iconEditorProvider.notifier)
+                          .setIsItalic(value ?? false);
+                    }),
+              ],
+            ),
           ],
         ),
+        Text(
+          'Font',
+          style: context.textTheme.bodyMedium
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
         DropdownButton<String>(
+          isDense: false,
+          padding: EdgeInsets.zero,
+          isExpanded: true,
           value: selectedFont,
           items: fonts.map((String font) {
             return DropdownMenuItem<String>(
@@ -99,59 +109,54 @@ class TextTabOptionsWidget extends ConsumerWidget {
                 .setSelectedFont(newValue ?? 'Roboto');
           },
         ),
-        Row(
-          children: [
-            Text('Color'),
-            SizedBox(
-              width: 20,
-            ),
-
-            InkWell(
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      backgroundColor: AppColors.whiteColor,
-                      title: const Text("Pick a Color"),
-                      content: SingleChildScrollView(
-                        child: ColorPicker(
-                          pickerColor: iconTextColor,
-                          onColorChanged: (color) {
-                            ref
-                                .read(iconEditorProvider.notifier)
-                                .setIconColor(color);
-                          },
-                          showLabel: true,
-                          pickerAreaBorderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          child: const Text("Close"),
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog
-                          },
-                        ),
-                      ],
-                    );
-                  },
+        Text(
+          'Color',
+          style: context.textTheme.bodyMedium
+              ?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        InkWell(
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  backgroundColor: AppColors.whiteColor,
+                  title: const Text("Pick a Color"),
+                  content: SingleChildScrollView(
+                    child: ColorPicker(
+                      pickerColor: iconTextColor,
+                      onColorChanged: (color) {
+                        ref
+                            .read(iconEditorProvider.notifier)
+                            .setIconColor(color);
+                      },
+                      showLabel: true,
+                      pickerAreaBorderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text("Close"),
+                      onPressed: () {
+                        Navigator.of(context).pop(); // Close the dialog
+                      },
+                    ),
+                  ],
                 );
               },
-              child: Container(
-                height: 50,
-                width: 50,
-                decoration: BoxDecoration(
-                    color: iconTextColor,
-                    borderRadius: BorderRadius.circular(10)),
-              ),
-            )
-            // ColorPicker(
-            //     pickerColor: iconTextColor,
-            //     onColorChanged: (color) {
-            //       ref.read(iconEditorProvider.notifier).setIconColor(color);
-            //     })
-          ],
+            );
+          },
+          child: Container(
+            height: 30,
+            width: 80,
+            decoration: BoxDecoration(
+                border: Border.all(color: AppColors.primaryTextColor),
+                color: iconTextColor,
+                borderRadius: BorderRadius.circular(3)),
+          ),
         )
       ],
     );

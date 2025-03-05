@@ -10,9 +10,11 @@ class IconEditorState {
   final bool isBold;
   final bool isItalic;
   final String selectedFont;
+  final String isBoldOrItalic;
 
   IconEditorState(
       {required this.selectedTab,
+      required this.isBoldOrItalic,
       required this.iconTextColor,
       required this.isBold,
       required this.isItalic,
@@ -25,6 +27,7 @@ class IconEditorState {
       Color? iconTextColor,
       bool? isBold,
       String? selectedFont,
+      String? isBoldOrItalic,
       bool? isItalic}) {
     return IconEditorState(
         selectedTab: selectedTab ?? this.selectedTab,
@@ -32,7 +35,8 @@ class IconEditorState {
         iconText: iconText ?? this.iconText,
         isBold: isBold ?? this.isBold,
         isItalic: isItalic ?? this.isItalic,
-        selectedFont: selectedFont ?? this.selectedFont);
+        selectedFont: selectedFont ?? this.selectedFont,
+        isBoldOrItalic: isBoldOrItalic ?? this.isBoldOrItalic);
   }
 
   factory IconEditorState.initial() {
@@ -42,7 +46,8 @@ class IconEditorState {
         iconTextColor: AppColors.whiteColor,
         isBold: false,
         isItalic: false,
-        selectedFont: 'Roboto');
+        selectedFont: 'Roboto',
+        isBoldOrItalic: '');
   }
 }
 
@@ -54,6 +59,10 @@ class IconEditorNotifier extends Notifier<IconEditorState> {
 
   void setSelectedTab(String selectedTab) {
     state = state.copyWith(selectedTab: selectedTab);
+  }
+
+  void setIsBoldOrItalic(String isBoldOrItalic) {
+    state = state.copyWith(isBoldOrItalic: isBoldOrItalic);
   }
 
   void setSelectedFont(String font) {

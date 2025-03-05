@@ -74,6 +74,21 @@ class AppTheme {
             ),
       ),
     ),
+    segmentedButtonTheme: SegmentedButtonThemeData(
+        style: ButtonStyle(
+      side:
+          WidgetStatePropertyAll(BorderSide(color: AppColors.primaryTextColor)),
+      iconColor: WidgetStatePropertyAll(AppColors.primaryTextColor),
+      textStyle:
+          WidgetStatePropertyAll(TextStyle(color: AppColors.primaryTextColor)),
+      backgroundColor:
+          WidgetStatePropertyAll(AppColors.primaryColor.withValues(alpha: 0.3)),
+      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+        const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+        ),
+      ),
+    )),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.primaryColor,
@@ -117,49 +132,49 @@ class AppTheme {
 class AppTextTheme {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
         /// Use this for titles like in app bars etc
-        displayLarge: GoogleFonts.montserrat(
+        displayLarge: GoogleFonts.roboto(
           color: colorScheme.inverseSurface,
           fontSize: 25,
           fontWeight: FontWeight.w500,
         ),
 
         /// Use this for attribute title or sub headings
-        titleLarge: GoogleFonts.montserrat(
+        titleLarge: GoogleFonts.roboto(
           color: colorScheme.inverseSurface,
           fontSize: 18,
           fontWeight: FontWeight.w600,
         ),
 
         /// Use this for when to bold any kind of attributes in a card or UI widget
-        bodyLarge: GoogleFonts.montserrat(
+        bodyLarge: GoogleFonts.roboto(
           color: colorScheme.inverseSurface,
           fontSize: 14,
           fontWeight: FontWeight.w600,
         ),
 
         /// Use this for any kind of attributes in a card or UI widget
-        bodyMedium: GoogleFonts.montserrat(
+        bodyMedium: GoogleFonts.roboto(
           color: colorScheme.inverseSurface,
           fontSize: 14,
           fontWeight: FontWeight.w400,
         ),
 
         /// Used for bold headings of textfields and other widgets
-        titleMedium: GoogleFonts.montserrat(
+        titleMedium: GoogleFonts.roboto(
           color: colorScheme.inverseSurface,
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
 
         /// Used for non bold/regular headings of textfields and other widgets
-        titleSmall: GoogleFonts.montserrat(
+        titleSmall: GoogleFonts.roboto(
           color: colorScheme.inverseSurface,
           fontSize: 16,
           fontWeight: FontWeight.w400,
         ),
 
         /// Use this for any kind of attributes in a card or UI widget
-        bodySmall: GoogleFonts.montserrat(
+        bodySmall: GoogleFonts.roboto(
           fontWeight: FontWeight.w400,
           color: colorScheme.inverseSurface,
           fontSize: 12,

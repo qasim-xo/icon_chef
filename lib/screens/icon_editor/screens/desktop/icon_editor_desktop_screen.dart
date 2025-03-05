@@ -3,11 +3,13 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icon_chef/constants/extension_constants.dart';
 import 'package:icon_chef/screens/icon_editor/providers/icon_editor_provider.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/android_icon_widget.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/clip_art_widget.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/icon_settings_bar_widget.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/text_tab_options_widget.dart';
+import 'package:icon_chef/theme/app_colors.dart';
 import 'package:image_downloader_web/image_downloader_web.dart';
 
 class IconEditorDesktopScreen extends ConsumerStatefulWidget {
@@ -48,52 +50,21 @@ class _IconEditorDesktopScreenState
   final TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final selectedTab = ref.watch(iconEditorProvider).selectedTab;
-    final iconText = ref.watch(iconEditorProvider).iconText;
-
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryColor,
+        title: Text(
+          'Icon Chef',
+          style: context.textTheme.bodyMedium?.copyWith(
+              color: AppColors.whiteColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 20),
+        ),
+      ),
       body: Row(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Icon'),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  SegmentedButton(
-                    segments: [
-                      ButtonSegment(label: Text('Text'), value: 'Text'),
-                      ButtonSegment(value: 'Image', label: Text('Image'))
-                    ],
-                    selected: {selectedTab},
-                    onSelectionChanged: (Set<String> newSelection) {
-                      ref
-                          .read(iconEditorProvider.notifier)
-                          .setSelectedTab(newSelection.first);
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextTabOptionsWidget(
-                textController: textController,
-              ),
-              GestureDetector(
-                onTap: () {
-                  _captureAndDownload();
-                },
-                child: AndroidIconWidget(
-                  globalKey: _globalKey,
-                ),
-              ),
-            ],
-          ),
+          IconSettingsBarWidget(),
+          Expanded(child: AndroidIconWidget(globalKey: _globalKey))
         ],
       ),
     );

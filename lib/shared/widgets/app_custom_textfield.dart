@@ -147,7 +147,7 @@ class _AppTextFieldState extends State<AppTextField> {
         disabledBorder: widget.border,
         errorBorder: widget.border,
         filled: true,
-        fillColor: widget.fillColor ?? AppColors.textfieldColor,
+        fillColor: widget.fillColor ?? AppColors.primaryColor,
         // border: widget.border ?? widget.focusedBorder,
         labelText: widget.labelText,
         contentPadding: widget.contentPadding ??

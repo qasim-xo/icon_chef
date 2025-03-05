@@ -8,10 +8,6 @@ import 'package:icon_chef/theme/app_colors.dart';
 class AndroidIconWidget extends ConsumerWidget {
   const AndroidIconWidget({super.key, required this.globalKey});
 
-  // final String text;
-  // final Color backgroundColor;
-  // final Color textColor;
-  // final FontWeight fontWeight;
   final GlobalKey globalKey;
 
   @override
