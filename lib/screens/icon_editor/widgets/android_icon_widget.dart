@@ -17,6 +17,7 @@ class AndroidIconWidget extends ConsumerWidget {
     final isBold = ref.watch(iconEditorProvider).isBold;
     final isItalic = ref.watch(iconEditorProvider).isItalic;
     final selectedFont = ref.watch(iconEditorProvider).selectedFont;
+    final padding = ref.watch(iconEditorProvider).padding;
     return RepaintBoundary(
       key: globalKey,
       child: Container(
@@ -28,14 +29,14 @@ class AndroidIconWidget extends ConsumerWidget {
           child: FittedBox(
             fit: BoxFit.fitWidth,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(padding),
               child: Text(
                 text,
                 style: context.textTheme.bodyMedium?.copyWith(
                   fontFamily: GoogleFonts.getFont(selectedFont).fontFamily,
                   fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
                   fontStyle: isItalic ? FontStyle.italic : FontStyle.normal,
-                  fontSize: 20,
+                  fontSize: 40,
                   color: iconTextColor,
                 ),
               ),

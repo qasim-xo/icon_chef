@@ -11,6 +11,7 @@ class IconEditorState {
   final bool isItalic;
   final String selectedFont;
   final String isBoldOrItalic;
+  final double padding;
 
   IconEditorState(
       {required this.selectedTab,
@@ -19,6 +20,7 @@ class IconEditorState {
       required this.isBold,
       required this.isItalic,
       required this.selectedFont,
+      required this.padding,
       required this.iconText});
 
   IconEditorState copyWith(
@@ -28,6 +30,7 @@ class IconEditorState {
       bool? isBold,
       String? selectedFont,
       String? isBoldOrItalic,
+      double? padding,
       bool? isItalic}) {
     return IconEditorState(
         selectedTab: selectedTab ?? this.selectedTab,
@@ -36,7 +39,8 @@ class IconEditorState {
         isBold: isBold ?? this.isBold,
         isItalic: isItalic ?? this.isItalic,
         selectedFont: selectedFont ?? this.selectedFont,
-        isBoldOrItalic: isBoldOrItalic ?? this.isBoldOrItalic);
+        isBoldOrItalic: isBoldOrItalic ?? this.isBoldOrItalic,
+        padding: padding ?? this.padding);
   }
 
   factory IconEditorState.initial() {
@@ -47,7 +51,8 @@ class IconEditorState {
         isBold: false,
         isItalic: false,
         selectedFont: 'Roboto',
-        isBoldOrItalic: '');
+        isBoldOrItalic: '',
+        padding: 25);
   }
 }
 
@@ -67,6 +72,10 @@ class IconEditorNotifier extends Notifier<IconEditorState> {
 
   void setSelectedFont(String font) {
     state = state.copyWith(selectedFont: font);
+  }
+
+  void setPadding(double padding) {
+    state = state.copyWith(padding: padding);
   }
 
   void setIconText(String iconText) {

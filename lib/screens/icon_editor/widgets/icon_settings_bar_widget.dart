@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icon_chef/constants/extension_constants.dart';
 import 'package:icon_chef/screens/icon_editor/providers/icon_editor_provider.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/android_icon_widget.dart';
+import 'package:icon_chef/screens/icon_editor/widgets/background_options_widget.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/clip_art_widget.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/text_tab_options_widget.dart';
 
@@ -37,6 +38,9 @@ class _IconSettingsBarWidgetState extends ConsumerState<IconSettingsBarWidget> {
                 style: context.textTheme.bodyMedium
                     ?.copyWith(fontWeight: FontWeight.bold),
               ),
+              SizedBox(
+                height: 3,
+              ),
               SegmentedButton(
                 segments: [
                   ButtonSegment(label: Text('Text'), value: 'Text'),
@@ -55,6 +59,8 @@ class _IconSettingsBarWidgetState extends ConsumerState<IconSettingsBarWidget> {
               TextTabOptionsWidget(
                 textController: textController,
               ),
+              Divider(),
+              BackgroundOptionsWidget()
             ],
           ),
         ),

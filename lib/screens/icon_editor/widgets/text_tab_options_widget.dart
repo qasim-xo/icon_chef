@@ -19,6 +19,7 @@ class TextTabOptionsWidget extends ConsumerWidget {
     final isBold = ref.watch(iconEditorProvider).isBold;
     final isItalic = ref.watch(iconEditorProvider).isItalic;
     final selectedFont = ref.watch(iconEditorProvider).selectedFont;
+    final padding = ref.watch(iconEditorProvider).padding;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +30,7 @@ class TextTabOptionsWidget extends ConsumerWidget {
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         SizedBox(
-          width: 20,
+          height: 3,
         ),
         SizedBox(
           height: 60,
@@ -115,7 +116,7 @@ class TextTabOptionsWidget extends ConsumerWidget {
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         SizedBox(
-          width: 20,
+          height: 3,
         ),
         InkWell(
           onTap: () {
@@ -157,7 +158,20 @@ class TextTabOptionsWidget extends ConsumerWidget {
                 color: iconTextColor,
                 borderRadius: BorderRadius.circular(3)),
           ),
-        )
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text('Padding',
+            style: context.textTheme.bodyMedium
+                ?.copyWith(fontWeight: FontWeight.bold)),
+        Slider(
+            value: padding,
+            min: 0,
+            max: 100,
+            onChanged: (value) {
+              ref.read(iconEditorProvider.notifier).setPadding(value);
+            })
       ],
     );
   }
