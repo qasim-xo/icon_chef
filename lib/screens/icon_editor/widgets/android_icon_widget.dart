@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:icon_chef/constants/data_constants.dart';
 import 'package:icon_chef/constants/extension_constants.dart';
 import 'package:icon_chef/screens/icon_editor/providers/icon_editor_provider.dart';
-import 'package:icon_chef/theme/app_colors.dart';
 
 class AndroidIconWidget extends ConsumerWidget {
   const AndroidIconWidget({super.key, required this.globalKey});
@@ -18,13 +19,28 @@ class AndroidIconWidget extends ConsumerWidget {
     final isItalic = ref.watch(iconEditorProvider).isItalic;
     final selectedFont = ref.watch(iconEditorProvider).selectedFont;
     final padding = ref.watch(iconEditorProvider).padding;
+    final bgColor = ref.watch(iconEditorProvider).backgroundColor;
+    final shape = ref.watch(iconEditorProvider).shape;
+    // final mobileImage = ref.watch(iconEditorProvider).mobileImage;
+    final webImage = ref.watch(iconEditorProvider).webImage;
     return RepaintBoundary(
       key: globalKey,
       child: Container(
         height: 60,
         width: 60,
         decoration: BoxDecoration(
-            shape: BoxShape.circle, color: AppColors.primaryColor),
+          borderRadius: shape == Shape.square ? BorderRadius.circular(6) : null,
+          image: webImage != null
+              ? DecorationImage(
+                  image: MemoryImage(webImage),
+                )
+              : null, // No image if webImage is null
+
+          shape: shape == Shape.circle ? BoxShape.circle : BoxShape.rectangle,
+          color: webImage == null
+              ? Color(bgColor)
+              : null, // Use primary color if no image
+        ),
         child: Center(
           child: FittedBox(
             fit: BoxFit.fitWidth,
@@ -37,7 +53,7 @@ class AndroidIconWidget extends ConsumerWidget {
                   fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
                   fontStyle: isItalic ? FontStyle.italic : FontStyle.normal,
                   fontSize: 40,
-                  color: iconTextColor,
+                  color: Color(iconTextColor),
                 ),
               ),
             ),

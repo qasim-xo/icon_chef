@@ -128,11 +128,11 @@ class TextTabOptionsWidget extends ConsumerWidget {
                   title: const Text("Pick a Color"),
                   content: SingleChildScrollView(
                     child: ColorPicker(
-                      pickerColor: iconTextColor,
+                      pickerColor: Color(iconTextColor),
                       onColorChanged: (color) {
                         ref
                             .read(iconEditorProvider.notifier)
-                            .setIconColor(color);
+                            .setIconColor(color.toARGB32());
                       },
                       showLabel: true,
                       pickerAreaBorderRadius: BorderRadius.circular(10),
@@ -155,7 +155,7 @@ class TextTabOptionsWidget extends ConsumerWidget {
             width: 80,
             decoration: BoxDecoration(
                 border: Border.all(color: AppColors.primaryTextColor),
-                color: iconTextColor,
+                color: Color(iconTextColor),
                 borderRadius: BorderRadius.circular(3)),
           ),
         ),

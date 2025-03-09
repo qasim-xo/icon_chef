@@ -30,38 +30,43 @@ class _IconSettingsBarWidgetState extends ConsumerState<IconSettingsBarWidget> {
         decoration: BoxDecoration(color: Colors.white),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Icon',
-                style: context.textTheme.bodyMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 3,
-              ),
-              SegmentedButton(
-                segments: [
-                  ButtonSegment(label: Text('Text'), value: 'Text'),
-                  ButtonSegment(value: 'Image', label: Text('Image'))
+          child: Scrollbar(
+            thumbVisibility: true,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Icon',
+                    style: context.textTheme.bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  SegmentedButton(
+                    segments: [
+                      ButtonSegment(label: Text('Text'), value: 'Text'),
+                      ButtonSegment(value: 'Image', label: Text('Image'))
+                    ],
+                    selected: {selectedTab},
+                    onSelectionChanged: (Set<String> newSelection) {
+                      ref
+                          .read(iconEditorProvider.notifier)
+                          .setSelectedTab(newSelection.first);
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextTabOptionsWidget(
+                    textController: textController,
+                  ),
+                  Divider(),
+                  BackgroundOptionsWidget(),
                 ],
-                selected: {selectedTab},
-                onSelectionChanged: (Set<String> newSelection) {
-                  ref
-                      .read(iconEditorProvider.notifier)
-                      .setSelectedTab(newSelection.first);
-                },
               ),
-              SizedBox(
-                height: 10,
-              ),
-              TextTabOptionsWidget(
-                textController: textController,
-              ),
-              Divider(),
-              BackgroundOptionsWidget()
-            ],
+            ),
           ),
         ),
       ),
