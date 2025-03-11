@@ -16,8 +16,8 @@ import 'package:icon_chef/theme/app_colors.dart';
 //   final String selectedFont;
 //   final String isBoldOrItalic;
 //   final double padding;
-//   final File? mobileImage;
-//   final Uint8List? webImage;
+//   final File? mobileBgImage;
+//   final Uint8List? webBgImage;
 
 //   IconEditorState(
 //       {required this.selectedTab,
@@ -28,8 +28,8 @@ import 'package:icon_chef/theme/app_colors.dart';
 //       required this.selectedFont,
 //       required this.padding,
 //       required this.iconText,
-//       required this.mobileImage,
-//       required this.webImage});
+//       required this.mobileBgImage,
+//       required this.webBgImage});
 
 //   IconEditorState copyWith(
 //       {String? selectedTab,
@@ -40,8 +40,8 @@ import 'package:icon_chef/theme/app_colors.dart';
 //       String? isBoldOrItalic,
 //       double? padding,
 //       bool? isItalic,
-//       File? mobileImage,
-//       Uint8List? webImage}) {
+//       File? mobileBgImage,
+//       Uint8List? webBgImage}) {
 //     return IconEditorState(
 //         selectedTab: selectedTab ?? this.selectedTab,
 //         iconTextColor: iconTextColor ?? this.iconTextColor,
@@ -51,8 +51,8 @@ import 'package:icon_chef/theme/app_colors.dart';
 //         selectedFont: selectedFont ?? this.selectedFont,
 //         isBoldOrItalic: isBoldOrItalic ?? this.isBoldOrItalic,
 //         padding: padding ?? this.padding,
-//         mobileImage: mobileImage ?? this.mobileImage,
-//         webImage: webImage ?? this.webImage);
+//         mobileBgImage: mobileBgImage ?? this.mobileBgImage,
+//         webBgImage: webBgImage ?? this.webBgImage);
 //   }
 
 //   factory IconEditorState.initial() {
@@ -65,8 +65,8 @@ import 'package:icon_chef/theme/app_colors.dart';
 //         selectedFont: 'Roboto',
 //         isBoldOrItalic: '',
 //         padding: 25,
-//         mobileImage: null,
-//         webImage: null);
+//         mobileBgImage: null,
+//         webBgImage: null);
 //   }
 // }
 
@@ -80,20 +80,28 @@ class IconEditorNotifier extends Notifier<IconEditorState> {
     state = state.copyWith(shape: shape);
   }
 
-  void setMobileImage(File image) {
-    state = state.copyWith(mobileImage: image);
+  void setMobileBgImage(File image) {
+    state = state.copyWith(mobileBgImage: image);
   }
 
   void setBgColor(int colotInt) {
     state = state.copyWith(backgroundColor: colotInt);
   }
 
-  void resetImages() {
-    state = state.copyWith(mobileImage: null, webImage: null);
+  void resetBgImages() {
+    state = state.copyWith(mobileBgImage: null, webBgImage: null);
+  }
+
+  void setWebBgImage(Uint8List image) {
+    state = state.copyWith(webBgImage: image);
   }
 
   void setWebImage(Uint8List image) {
     state = state.copyWith(webImage: image);
+  }
+
+  void setMobileImage(File image) {
+    state = state.copyWith(mobileImage: image);
   }
 
   void setSelectedTab(String selectedTab) {

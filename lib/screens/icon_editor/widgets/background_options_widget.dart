@@ -27,14 +27,14 @@ class _BackgroundOptionsWidgetState
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
         var selected = File(image.path);
-        ref.read(iconEditorProvider.notifier).setMobileImage(selected);
+        ref.read(iconEditorProvider.notifier).setMobileBgImage(selected);
       }
     } else {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
         var selected = await image.readAsBytes();
-        ref.read(iconEditorProvider.notifier).setWebImage(selected);
+        ref.read(iconEditorProvider.notifier).setWebBgImage(selected);
       }
     }
   }
@@ -62,7 +62,7 @@ class _BackgroundOptionsWidgetState
             ),
             GestureDetector(
               onTap: () {
-                ref.read(iconEditorProvider.notifier).resetImages();
+                ref.read(iconEditorProvider.notifier).resetBgImages();
               },
               child: Card(
                   child: Padding(

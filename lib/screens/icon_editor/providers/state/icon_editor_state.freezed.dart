@@ -25,10 +25,14 @@ mixin _$IconEditorState {
   String get selectedFont;
   String get isBoldOrItalic;
   double get padding;
-  @FileConverter()
-  File? get mobileImage;
   @Uint8ListConverter()
   Uint8List? get webImage;
+  @FileConverter()
+  File? get mobileImage;
+  @FileConverter()
+  File? get mobileBgImage;
+  @Uint8ListConverter()
+  Uint8List? get webBgImage;
 
   /// Create a copy of IconEditorState
   /// with the given fields replaced by the non-null parameter values.
@@ -63,9 +67,13 @@ mixin _$IconEditorState {
             (identical(other.isBoldOrItalic, isBoldOrItalic) ||
                 other.isBoldOrItalic == isBoldOrItalic) &&
             (identical(other.padding, padding) || other.padding == padding) &&
+            const DeepCollectionEquality().equals(other.webImage, webImage) &&
             (identical(other.mobileImage, mobileImage) ||
                 other.mobileImage == mobileImage) &&
-            const DeepCollectionEquality().equals(other.webImage, webImage));
+            (identical(other.mobileBgImage, mobileBgImage) ||
+                other.mobileBgImage == mobileBgImage) &&
+            const DeepCollectionEquality()
+                .equals(other.webBgImage, webBgImage));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -82,12 +90,14 @@ mixin _$IconEditorState {
       selectedFont,
       isBoldOrItalic,
       padding,
+      const DeepCollectionEquality().hash(webImage),
       mobileImage,
-      const DeepCollectionEquality().hash(webImage));
+      mobileBgImage,
+      const DeepCollectionEquality().hash(webBgImage));
 
   @override
   String toString() {
-    return 'IconEditorState(selectedTab: $selectedTab, shape: $shape, iconText: $iconText, iconTextColor: $iconTextColor, backgroundColor: $backgroundColor, isBold: $isBold, isItalic: $isItalic, selectedFont: $selectedFont, isBoldOrItalic: $isBoldOrItalic, padding: $padding, mobileImage: $mobileImage, webImage: $webImage)';
+    return 'IconEditorState(selectedTab: $selectedTab, shape: $shape, iconText: $iconText, iconTextColor: $iconTextColor, backgroundColor: $backgroundColor, isBold: $isBold, isItalic: $isItalic, selectedFont: $selectedFont, isBoldOrItalic: $isBoldOrItalic, padding: $padding, webImage: $webImage, mobileImage: $mobileImage, mobileBgImage: $mobileBgImage, webBgImage: $webBgImage)';
   }
 }
 
@@ -108,8 +118,10 @@ abstract mixin class $IconEditorStateCopyWith<$Res> {
       String selectedFont,
       String isBoldOrItalic,
       double padding,
+      @Uint8ListConverter() Uint8List? webImage,
       @FileConverter() File? mobileImage,
-      @Uint8ListConverter() Uint8List? webImage});
+      @FileConverter() File? mobileBgImage,
+      @Uint8ListConverter() Uint8List? webBgImage});
 }
 
 /// @nodoc
@@ -135,8 +147,10 @@ class _$IconEditorStateCopyWithImpl<$Res>
     Object? selectedFont = null,
     Object? isBoldOrItalic = null,
     Object? padding = null,
-    Object? mobileImage = freezed,
     Object? webImage = freezed,
+    Object? mobileImage = freezed,
+    Object? mobileBgImage = freezed,
+    Object? webBgImage = freezed,
   }) {
     return _then(_self.copyWith(
       selectedTab: null == selectedTab
@@ -179,13 +193,21 @@ class _$IconEditorStateCopyWithImpl<$Res>
           ? _self.padding
           : padding // ignore: cast_nullable_to_non_nullable
               as double,
+      webImage: freezed == webImage
+          ? _self.webImage
+          : webImage // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
       mobileImage: freezed == mobileImage
           ? _self.mobileImage
           : mobileImage // ignore: cast_nullable_to_non_nullable
               as File?,
-      webImage: freezed == webImage
-          ? _self.webImage
-          : webImage // ignore: cast_nullable_to_non_nullable
+      mobileBgImage: freezed == mobileBgImage
+          ? _self.mobileBgImage
+          : mobileBgImage // ignore: cast_nullable_to_non_nullable
+              as File?,
+      webBgImage: freezed == webBgImage
+          ? _self.webBgImage
+          : webBgImage // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
     ));
   }
@@ -205,8 +227,10 @@ class _IconEditorState implements IconEditorState {
       required this.selectedFont,
       required this.isBoldOrItalic,
       required this.padding,
+      @Uint8ListConverter() required this.webImage,
       @FileConverter() required this.mobileImage,
-      @Uint8ListConverter() required this.webImage});
+      @FileConverter() required this.mobileBgImage,
+      @Uint8ListConverter() required this.webBgImage});
   factory _IconEditorState.fromJson(Map<String, dynamic> json) =>
       _$IconEditorStateFromJson(json);
 
@@ -232,11 +256,17 @@ class _IconEditorState implements IconEditorState {
   @override
   final double padding;
   @override
+  @Uint8ListConverter()
+  final Uint8List? webImage;
+  @override
   @FileConverter()
   final File? mobileImage;
   @override
+  @FileConverter()
+  final File? mobileBgImage;
+  @override
   @Uint8ListConverter()
-  final Uint8List? webImage;
+  final Uint8List? webBgImage;
 
   /// Create a copy of IconEditorState
   /// with the given fields replaced by the non-null parameter values.
@@ -275,9 +305,13 @@ class _IconEditorState implements IconEditorState {
             (identical(other.isBoldOrItalic, isBoldOrItalic) ||
                 other.isBoldOrItalic == isBoldOrItalic) &&
             (identical(other.padding, padding) || other.padding == padding) &&
+            const DeepCollectionEquality().equals(other.webImage, webImage) &&
             (identical(other.mobileImage, mobileImage) ||
                 other.mobileImage == mobileImage) &&
-            const DeepCollectionEquality().equals(other.webImage, webImage));
+            (identical(other.mobileBgImage, mobileBgImage) ||
+                other.mobileBgImage == mobileBgImage) &&
+            const DeepCollectionEquality()
+                .equals(other.webBgImage, webBgImage));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -294,12 +328,14 @@ class _IconEditorState implements IconEditorState {
       selectedFont,
       isBoldOrItalic,
       padding,
+      const DeepCollectionEquality().hash(webImage),
       mobileImage,
-      const DeepCollectionEquality().hash(webImage));
+      mobileBgImage,
+      const DeepCollectionEquality().hash(webBgImage));
 
   @override
   String toString() {
-    return 'IconEditorState(selectedTab: $selectedTab, shape: $shape, iconText: $iconText, iconTextColor: $iconTextColor, backgroundColor: $backgroundColor, isBold: $isBold, isItalic: $isItalic, selectedFont: $selectedFont, isBoldOrItalic: $isBoldOrItalic, padding: $padding, mobileImage: $mobileImage, webImage: $webImage)';
+    return 'IconEditorState(selectedTab: $selectedTab, shape: $shape, iconText: $iconText, iconTextColor: $iconTextColor, backgroundColor: $backgroundColor, isBold: $isBold, isItalic: $isItalic, selectedFont: $selectedFont, isBoldOrItalic: $isBoldOrItalic, padding: $padding, webImage: $webImage, mobileImage: $mobileImage, mobileBgImage: $mobileBgImage, webBgImage: $webBgImage)';
   }
 }
 
@@ -322,8 +358,10 @@ abstract mixin class _$IconEditorStateCopyWith<$Res>
       String selectedFont,
       String isBoldOrItalic,
       double padding,
+      @Uint8ListConverter() Uint8List? webImage,
       @FileConverter() File? mobileImage,
-      @Uint8ListConverter() Uint8List? webImage});
+      @FileConverter() File? mobileBgImage,
+      @Uint8ListConverter() Uint8List? webBgImage});
 }
 
 /// @nodoc
@@ -349,8 +387,10 @@ class __$IconEditorStateCopyWithImpl<$Res>
     Object? selectedFont = null,
     Object? isBoldOrItalic = null,
     Object? padding = null,
-    Object? mobileImage = freezed,
     Object? webImage = freezed,
+    Object? mobileImage = freezed,
+    Object? mobileBgImage = freezed,
+    Object? webBgImage = freezed,
   }) {
     return _then(_IconEditorState(
       selectedTab: null == selectedTab
@@ -393,13 +433,21 @@ class __$IconEditorStateCopyWithImpl<$Res>
           ? _self.padding
           : padding // ignore: cast_nullable_to_non_nullable
               as double,
+      webImage: freezed == webImage
+          ? _self.webImage
+          : webImage // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
       mobileImage: freezed == mobileImage
           ? _self.mobileImage
           : mobileImage // ignore: cast_nullable_to_non_nullable
               as File?,
-      webImage: freezed == webImage
-          ? _self.webImage
-          : webImage // ignore: cast_nullable_to_non_nullable
+      mobileBgImage: freezed == mobileBgImage
+          ? _self.mobileBgImage
+          : mobileBgImage // ignore: cast_nullable_to_non_nullable
+              as File?,
+      webBgImage: freezed == webBgImage
+          ? _self.webBgImage
+          : webBgImage // ignore: cast_nullable_to_non_nullable
               as Uint8List?,
     ));
   }

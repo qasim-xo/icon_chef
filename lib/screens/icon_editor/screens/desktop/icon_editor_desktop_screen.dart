@@ -37,7 +37,7 @@ class _IconEditorDesktopScreenState
 
       // Step 2: Convert to Different Sizes
       final originalImage = decodeImage(pngBytes);
-      List<int> sizes = [48, 72, 96, 144, 192]; // Android icon sizes
+      List<int> sizes = [48, 72, 96, 144, 192];
 
       for (int size in sizes) {
         final resizedImage =

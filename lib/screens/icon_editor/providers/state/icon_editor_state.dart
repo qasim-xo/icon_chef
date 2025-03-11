@@ -22,8 +22,10 @@ abstract class IconEditorState with _$IconEditorState {
     required String selectedFont,
     required String isBoldOrItalic,
     required double padding,
-    @FileConverter() required File? mobileImage,
     @Uint8ListConverter() required Uint8List? webImage,
+    @FileConverter() required File? mobileImage,
+    @FileConverter() required File? mobileBgImage,
+    @Uint8ListConverter() required Uint8List? webBgImage,
   }) = _IconEditorState;
 
   factory IconEditorState.initial() {
@@ -37,8 +39,10 @@ abstract class IconEditorState with _$IconEditorState {
         selectedFont: 'Roboto',
         isBoldOrItalic: '',
         padding: 25,
-        mobileImage: null,
+        mobileBgImage: null,
+        webBgImage: null,
         webImage: null,
+        mobileImage: null,
         shape: Shape.circle);
   }
 

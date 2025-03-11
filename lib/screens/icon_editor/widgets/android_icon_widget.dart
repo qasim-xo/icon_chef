@@ -22,7 +22,7 @@ class AndroidIconWidget extends ConsumerWidget {
     final bgColor = ref.watch(iconEditorProvider).backgroundColor;
     final shape = ref.watch(iconEditorProvider).shape;
     // final mobileImage = ref.watch(iconEditorProvider).mobileImage;
-    final webImage = ref.watch(iconEditorProvider).webImage;
+    final webImage = ref.watch(iconEditorProvider).webBgImage;
     return RepaintBoundary(
       key: globalKey,
       child: Container(

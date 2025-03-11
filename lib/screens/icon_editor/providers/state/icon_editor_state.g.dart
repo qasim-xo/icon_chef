@@ -18,10 +18,14 @@ _IconEditorState _$IconEditorStateFromJson(Map<String, dynamic> json) =>
       selectedFont: json['selectedFont'] as String,
       isBoldOrItalic: json['isBoldOrItalic'] as String,
       padding: (json['padding'] as num).toDouble(),
-      mobileImage:
-          const FileConverter().fromJson(json['mobileImage'] as String?),
       webImage:
           const Uint8ListConverter().fromJson(json['webImage'] as List<int>?),
+      mobileImage:
+          const FileConverter().fromJson(json['mobileImage'] as String?),
+      mobileBgImage:
+          const FileConverter().fromJson(json['mobileBgImage'] as String?),
+      webBgImage:
+          const Uint8ListConverter().fromJson(json['webBgImage'] as List<int>?),
     );
 
 Map<String, dynamic> _$IconEditorStateToJson(_IconEditorState instance) =>
@@ -36,8 +40,10 @@ Map<String, dynamic> _$IconEditorStateToJson(_IconEditorState instance) =>
       'selectedFont': instance.selectedFont,
       'isBoldOrItalic': instance.isBoldOrItalic,
       'padding': instance.padding,
-      'mobileImage': const FileConverter().toJson(instance.mobileImage),
       'webImage': const Uint8ListConverter().toJson(instance.webImage),
+      'mobileImage': const FileConverter().toJson(instance.mobileImage),
+      'mobileBgImage': const FileConverter().toJson(instance.mobileBgImage),
+      'webBgImage': const Uint8ListConverter().toJson(instance.webBgImage),
     };
 
 const _$ShapeEnumMap = {
