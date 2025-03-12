@@ -21,7 +21,7 @@ class ImageTabOptionsWidget extends ConsumerWidget {
             await picker.pickImage(source: ImageSource.gallery);
         if (image != null) {
           var selected = File(image.path);
-          // ref.read(iconEditorProvider.notifier).setMobileImage(selected);
+          ref.read(iconEditorProvider.notifier).setMobileImage(selected);
         }
       } else {
         final ImagePicker picker = ImagePicker();
@@ -35,10 +35,17 @@ class ImageTabOptionsWidget extends ConsumerWidget {
     }
 
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
-        Card(
-          child: Row(
-            children: [Text('Select an image')],
+        GestureDetector(
+          onTap: () => pickImage(),
+          child: Card(
+            child: Row(
+              children: [
+                webImage != null ? Image.memory(webImage) : Icon(Icons.error),
+                Text('Select an image')
+              ],
+            ),
           ),
         )
       ],

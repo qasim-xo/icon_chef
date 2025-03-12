@@ -5,6 +5,7 @@ import 'package:icon_chef/screens/icon_editor/providers/icon_editor_provider.dar
 import 'package:icon_chef/screens/icon_editor/widgets/android_icon_widget.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/background_options_widget.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/clip_art_widget.dart';
+import 'package:icon_chef/screens/icon_editor/widgets/image_tab_options_widget.dart';
 import 'package:icon_chef/screens/icon_editor/widgets/text_tab_options_widget.dart';
 
 class IconSettingsBarWidget extends ConsumerStatefulWidget {
@@ -59,9 +60,11 @@ class _IconSettingsBarWidgetState extends ConsumerState<IconSettingsBarWidget> {
                   SizedBox(
                     height: 10,
                   ),
-                  TextTabOptionsWidget(
-                    textController: textController,
-                  ),
+                  selectedTab == 'Text'
+                      ? TextTabOptionsWidget(
+                          textController: textController,
+                        )
+                      : ImageTabOptionsWidget(),
                   Divider(),
                   BackgroundOptionsWidget(),
                 ],
