@@ -23,10 +23,11 @@ class _IconSettingsBarWidgetState extends ConsumerState<IconSettingsBarWidget> {
   @override
   Widget build(BuildContext context) {
     final selectedTab = ref.watch(iconEditorProvider).selectedTab;
-    final iconText = ref.watch(iconEditorProvider).iconText;
+
     return Material(
       elevation: 10,
       child: Container(
+        height: double.infinity,
         width: 400,
         decoration: BoxDecoration(color: Colors.white),
         child: Padding(
