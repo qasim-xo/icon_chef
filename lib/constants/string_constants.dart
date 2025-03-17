@@ -3,5 +3,6 @@ final List<String> fonts = [
   'Lobster',
   'Pacifico',
   'Oswald',
-  'Raleway'
+  'Raleway',
+  'Tienne'
 ];

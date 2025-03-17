@@ -110,6 +110,12 @@ class TextTabOptionsWidget extends ConsumerWidget {
                 .setSelectedFont(newValue ?? 'Roboto');
           },
         ),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text('Import font'),
+          ),
+        ),
         Text(
           'Color',
           style: context.textTheme.bodyMedium
